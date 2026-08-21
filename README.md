@@ -7,8 +7,7 @@ This is my second SAP ABAP Cloud project: Incident management system built with 
 - My own notes from the Logali master's program manual.
 - Claude Pro.
 
-## Step 1: Prepare material
-### Domains:
+## Step 1: Domains
 - ZDO_CHANGED_DATE_LGO
 - ZDO_CREATION_DATE_LGO
 - ZDO_CURR_STATUS_LGO
@@ -29,7 +28,7 @@ This is my second SAP ABAP Cloud project: Incident management system built with 
 
 *Curr means current and prev means previous*
 
-### Data elements:
+## Step 2: Data elements
 - ZDE_CHANGED_DATE_LGO
 - ZDE_CREATION_DATE_LGO
 - ZDE_CURR_STATUS_LGO
@@ -43,8 +42,12 @@ This is my second SAP ABAP Cloud project: Incident management system built with 
 - ZDE_TEXT_LGO
 - ZDE_TITLE_LGO
 
-### Tables:
+## Step 3: Tables
 - ZDT_INCT_LGO (with foreign key status and priority)
 - ZDT_INCT_H_LGO (with foreign key inc_uuid)
 - ZDT_STATUS_LGO
 - ZDT_PRIORITY_LGO
+
+## Step 4: Fill status and priority tables with data
+I created ZCL_STATUS_PRIORITY_DATA, a class implementing IF_OO_ADT_CLASSRUN o INSERT the fixed master data values into ZDT_STATUS_LGO and ZDT_PRIORITY_LGO.
+Results in screenshots.
