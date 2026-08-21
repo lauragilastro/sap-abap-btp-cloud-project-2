@@ -50,6 +50,9 @@ This is my second SAP ABAP Cloud project: Incident management system built with 
 
 ## Step 4: Fill status and priority tables with data
 I created ZCL_STATUS_PRIORITY_DATA, a class implementing IF_OO_ADT_CLASSRUN o INSERT the fixed master data values into ZDT_STATUS_LGO and ZDT_PRIORITY_LGO.
+
 Results in screenshots:
+
 ![Status table filled](filled-status-table.png)
+
 ![Priority table filled](filled-priority-table.png)
