@@ -56,3 +56,9 @@ Results in screenshots:
 ![Status table filled](filled-status-table.png)
 
 ![Priority table filled](filled-priority-table.png)
+
+## Step 5: Draft table
+We need to create a draft table for ZDT_INCT_LGO because it's the only table which is going to be directly edited by the user.
+Draft table is a mirror table of ZDT_INCT_LGO with same keys.
+Foreign keys were removed.
+Three standard draft technical fields were added.
