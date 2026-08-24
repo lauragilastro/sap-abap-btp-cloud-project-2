@@ -1,21 +1,29 @@
 managed implementation in class zbp_i_cds_inct_lgo unique;
 strict ( 2 );
-
+with draft;
 define behavior for ZI_CDS_INCT_LGO //alias <alias_name>
 persistent table zdt_inct_lgo
-lock master
+draft table zdt_inct_d_lgo
+lock master total etag last_changed_at
 authorization master ( instance )
-//etag master <field_name>
+etag master last_changed_at
 {
   create ( authorization : global );
   update;
   delete;
   field ( readonly, numbering : managed ) inc_uuid;
-  association _toHistory { create; }
+  association _toHistory { create; with draft; }
+
+  draft action Edit;
+  draft action Activate;
+  draft action Discard;
+  draft action Resume;
+  draft determine action Prepare;
 }
 
 define behavior for ZI_CDS_INCT_H_LGO //alias <alias_name>
 persistent table zdt_inct_h_lgo
+draft table zdt_inct_h_d_lgo
 lock dependent by _toInct
 authorization dependent by _toInct
 etag master last_changed_at
@@ -24,5 +32,5 @@ etag master last_changed_at
   delete;
   field ( readonly, numbering : managed ) his_uuid;
   field ( readonly ) inc_uuid;
-  association _toInct;
+  association _toInct { with draft; }
 }
