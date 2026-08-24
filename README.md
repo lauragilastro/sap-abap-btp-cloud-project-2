@@ -68,6 +68,6 @@ CDS were created over their respective tables.
 INCT CDS: is the root view entity and has a composition to history view.
 History CDS: is a simple view entity which has an association to the INCT view.
 
-# Step 7: Behavior Definition
+## Step 7: Behavior Definition
 In the history section, his_uuid is its own key, so it needs numbering: managed to be auto-generated.
 inc_uuid, on the other hand, is a foreign key inherited from the root via composition, it's filled in automatically, so it only needs readonly, without numbering: managed.
