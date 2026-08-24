@@ -65,8 +65,8 @@ Three standard draft technical fields were added.
 
 ## Step 6: CDSs
 CDS were created over their respective tables.
-INCT CDS: is the root view entity and has a composition to history view.
-History CDS: is a simple view entity which has an association to the INCT view.
+INCT CDS: is the root view entity and has a composition to history view and associations to status and priority CDSs.
+History, status and priority CDSs: they are a simple view entity which has an association to the INCT view.
 
 ## Step 7: Behavior Definition
 In the history section, his_uuid is its own key, so it needs numbering: managed to be auto-generated.
