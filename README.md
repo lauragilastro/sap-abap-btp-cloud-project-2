@@ -69,5 +69,17 @@ INCT CDS: is the root view entity and has a composition to history view and asso
 History, status and priority CDSs: they are a simple view entity which has an association to the INCT view.
 
 ## Step 7: Behavior Definition
+Behavior definition was auto-generated, but I added some necessary things:
 In the history section, his_uuid is its own key, so it needs numbering: managed to be auto-generated.
 inc_uuid, on the other hand, is a foreign key inherited from the root via composition, it's filled in automatically, so it only needs readonly, without numbering: managed.
+I had a problem during this process: I couldn't activate the behavior definition.
+
+### The problem with behavior definition and how I fixed it
+1. THE PROBLEM: I added the draft table to the behavior def. but the activation failed with these errors: "not activated for drafts" and "strict: every entity must be flagged as lock/authorization master or dependent". The code was correct but it never could be activated.
+2. UNSUCCESSFUL TRIES:
+   2.1. Activate all tables -> all CDS -> behavior def. in order.
+   2.2. Activate them all at the same time (Ctrl+Shift+F3).
+   2.3. Refresh project. Restart Eclipse and the PC.
+   2.4. Rewrite several times the draft table.
+3. THE ACTUAL ERROR: I wasn't familiar enough with the syntax yet, so I didn't know that the behavior definition needed "with draft;" in line 3, after strict ( 2 ); and also the child entity (history CDS) needed its own draft table.
+4. SOLUTIONS: I added "with draft;", I created the history table's draft table and I added { with draft; } to the associations. Finally I could activate the behavior definition. It took about 2 hours to fix this.
