@@ -63,7 +63,7 @@ Draft table is a mirror table of ZDT_INCT_LGO with same keys.
 Foreign keys were removed.
 Three standard draft technical fields were added.
 
-## Step 6: INCT and History CDSs
-Both CDS were created over their respective tables.
+## Step 6: CDSs
+CDS were created over their respective tables.
 INCT CDS: is the root view entity and has a composition to history view.
 History CDS: is a simple view entity which has an association to the INCT view.
