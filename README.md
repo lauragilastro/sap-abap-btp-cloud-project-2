@@ -83,3 +83,8 @@ I had a problem during this process: I couldn't activate the behavior definition
    2.4. Rewrite several times the draft table.
 3. THE ACTUAL ERROR: I wasn't familiar enough with the syntax yet, so I didn't know that the behavior definition needed "with draft;" in line 3, after strict ( 2 ); and also the child entity (history CDS) needed its own draft table.
 4. SOLUTIONS: I added "with draft;", I created the history table's draft table and I added { with draft; } to the associations. Finally I could activate the behavior definition. It took about 2 hours to fix this.
+
+## Step 8: Abstract CDS for status changing
+I needed an abstract CDS specifically for the status changing.
+Eventually the user will change status and a popup will appear with the status options, and that popup's fields are defined by the abstract CDS. Also needed because we will use that information for the history's update using the method changeStatus.
+Not needed for priority because priority has normal change, with no consequences.
