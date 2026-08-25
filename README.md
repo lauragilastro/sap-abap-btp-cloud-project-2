@@ -64,14 +64,18 @@ Foreign keys were removed.
 Three standard draft technical fields were added.
 
 ## Step 6: CDSs
-CDS were created over their respective tables.
-INCT CDS: is the root view entity and has a composition to history view and associations to status and priority CDSs.
-History, status and priority CDSs: they are a simple view entity which has an association to the INCT view.
+- CDS were created over their respective tables.
+- INCT CDS: is the root view entity and has a composition to history view and associations to status and priority CDSs.
+- History, status and priority CDSs: they are a simple view entity which has an association to the INCT view.
 
 ## Step 7: Behavior Definition
 Behavior definition was auto-generated, but I added some necessary things:
-In the history section, his_uuid is its own key, so it needs numbering: managed to be auto-generated.
-inc_uuid, on the other hand, is a foreign key inherited from the root via composition, it's filled in automatically, so it only needs readonly, without numbering: managed.
+- In the history section, his_uuid is its own key, so it needs numbering: managed to be auto-generated. inc_uuid, on the other hand, is a foreign key inherited from the root via composition, it's filled in automatically, so it only needs readonly, without numbering: managed.
+- field ( mandatory ) title, description, priority; -> It's not allowed to save empty fields in INCT table.
+- changeStatus declared.
+- A line to force refresh after running changeStatus.
+- setDefaultValues declared.
+
 I had a problem during this process: I couldn't activate the behavior definition.
 
 ### The problem with behavior definition and how I fixed it
