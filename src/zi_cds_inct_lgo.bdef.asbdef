@@ -12,7 +12,12 @@ etag master last_changed_at
   update;
   delete;
   field ( readonly, numbering : managed ) inc_uuid;
-  association _toHistory { create; with draft; }
+  field ( mandatory ) title, description, priority;
+  action ( features : instance ) changeStatus
+  parameter ZI_CDS_CHANGE_STATUS_LGO result [1] $self;
+  side effects { action changeStatus affects $self; }
+  determination setDefaultValues on modify { create; }
+  association _toHistory { with draft; }
 
   draft action Edit;
   draft action Activate;
@@ -28,8 +33,6 @@ lock dependent by _toInct
 authorization dependent by _toInct
 etag master last_changed_at
 {
-  update;
-  delete;
   field ( readonly, numbering : managed ) his_uuid;
   field ( readonly ) inc_uuid;
   association _toInct { with draft; }
