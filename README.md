@@ -20,11 +20,6 @@ This is my second SAP ABAP Cloud project: Incident management system built with 
 - ZDO_STATUS_DESCRIPTION_LGO
 - ZDO_TEXT_LGO
 - ZDO_TITLE_LGO
-- ZDE_CUSTOMER_ID_LGO
-- ZDE_PRIORITY_LGO
-- ZDE_STATUS_LGO
-- ZDE_TECHNICIAN_ID_LGO
-- ZDE_WORK_ORDER_ID_LGO
 
 *Curr means current and prev means previous*
 
