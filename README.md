@@ -92,3 +92,12 @@ I had a problem during this process: I couldn't activate the behavior definition
 I needed an abstract CDS specifically for the status changing.
 Eventually the user will change status and a popup will appear with the status options, and that popup's fields are defined by the abstract CDS. Also needed because we will use that information for the history's update using the method changeStatus.
 Not needed for priority because priority has normal change, with no consequences.
+
+## Step 9: Behavior Implementation
+Methods:
+### setDefaultValues
+When the user creates an incident, RAP automatically creates the draft entry, but at that point status and creation_date are empty (and status is marked as readonly, so the user can't fill it in manually anyway).
+
+This method is a determination (on modify { create; }) that runs automatically at the moment the user creates the incidence. The method sets status to 'OP' and fills creation_date with the current system date using cl_abap_context_info=>get_system_date( ).
+
+Result: every incident is created with these fields already filled, without the user having to (or being able to) set them by hand.
