@@ -1,15 +1,5 @@
-class ZBP_I_CDS_INCT_LGO definition
-  public
-  abstract
-  final
-  create public .
-
-public section.
-protected section.
-private section.
+CLASS zbp_i_cds_inct_lgo DEFINITION PUBLIC ABSTRACT FINAL FOR BEHAVIOR OF zi_cds_inct_lgo.
 ENDCLASS.
 
-
-
-CLASS ZBP_I_CDS_INCT_LGO IMPLEMENTATION.
+CLASS zbp_i_cds_inct_lgo IMPLEMENTATION.
 ENDCLASS.

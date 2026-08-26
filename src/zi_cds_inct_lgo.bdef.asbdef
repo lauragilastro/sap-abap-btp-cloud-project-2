@@ -1,7 +1,7 @@
 managed implementation in class zbp_i_cds_inct_lgo unique;
 strict ( 2 );
 with draft;
-define behavior for ZI_CDS_INCT_LGO //alias <alias_name>
+define behavior for ZI_CDS_INCT_LGO alias _inctBdef
 persistent table zdt_inct_lgo
 draft table zdt_inct_d_lgo
 lock master total etag last_changed_at
