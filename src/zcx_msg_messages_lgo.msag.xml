@@ -20,6 +20,12 @@
      <MSGNR>002</MSGNR>
      <TEXT>Error: status cannot be closed if current status is not completed</TEXT>
     </T100>
+    <T100>
+     <SPRSL>E</SPRSL>
+     <ARBGB>ZCX_MSG_MESSAGES_LGO</ARBGB>
+     <MSGNR>003</MSGNR>
+     <TEXT>Error: status cannot change to in progress if field responsible is empty</TEXT>
+    </T100>
    </T100>
   </asx:values>
  </asx:abap>

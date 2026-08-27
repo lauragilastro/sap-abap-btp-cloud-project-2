@@ -36,8 +36,9 @@ CLASS lhc__inctbdef IMPLEMENTATION.
 
   METHOD changeStatus.
 
-  DATA lv_previous_status TYPE zde_prev_status_lgo.
+DATA lv_previous_status TYPE zde_prev_status_lgo.
 DATA lv_current_status  TYPE zde_curr_status_lgo.
+DATA lv_responsible TYPE zde_responsible_lgo.
 
  " Leer parámetro que entra del popup
   READ TABLE keys INTO DATA(ls_key) INDEX 1.
@@ -63,6 +64,23 @@ IF lv_current_status = 'CL' AND lv_previous_status <> 'CO'.
   RAISE EXCEPTION TYPE zcx_class_messages_lgo
     EXPORTING
       textid = zcx_class_messages_lgo=>error_cl.
+ENDIF.
+
+" Authorization section
+  READ ENTITIES OF zi_cds_inct_lgo IN LOCAL MODE
+    ENTITY _inctBdef
+      FIELDS ( responsible )
+        WITH CORRESPONDING #( keys )
+    RESULT DATA(lt_responsible).
+
+READ TABLE lt_responsible INTO DATA(ls_responsible) INDEX 1.
+  lv_responsible = ls_responsible-responsible.
+
+IF lv_current_status = 'IP' AND lv_responsible IS INITIAL.
+  RAISE EXCEPTION TYPE zcx_class_messages_lgo
+    EXPORTING
+      textid = zcx_class_messages_lgo=>error_empty_responsible.
+
 ENDIF.
 
   ENDMETHOD.

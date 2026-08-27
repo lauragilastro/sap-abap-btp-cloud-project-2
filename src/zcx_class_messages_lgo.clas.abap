@@ -29,6 +29,16 @@ CLASS zcx_class_messages_lgo DEFINITION
         attr4 TYPE scx_attrname VALUE '',
       END OF error_cl.
 
+      CONSTANTS:
+      BEGIN OF error_empty_responsible,
+        msgid TYPE symsgid VALUE 'ZCX_MSG_MESSAGES_LGO',
+        msgno TYPE symsgno VALUE '003',
+        attr1 TYPE scx_attrname VALUE '',
+        attr2 TYPE scx_attrname VALUE '',
+        attr3 TYPE scx_attrname VALUE '',
+        attr4 TYPE scx_attrname VALUE '',
+      END OF error_empty_responsible.
+
     METHODS constructor
       IMPORTING
         !textid   LIKE if_t100_message=>t100key OPTIONAL
