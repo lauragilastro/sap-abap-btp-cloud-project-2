@@ -17,7 +17,7 @@ etag master last_changed_at
   parameter ZI_CDS_CHANGE_STATUS_LGO result [1] $self;
   side effects { action changeStatus affects $self; }
   determination setDefaultValues on modify { create; }
-  association _toHistory { with draft; }
+  association _toHistory { create; with draft; }
 
   draft action Edit;
   draft action Activate;

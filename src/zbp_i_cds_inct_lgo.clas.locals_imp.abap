@@ -83,6 +83,29 @@ IF lv_current_status = 'IP' AND lv_responsible IS INITIAL.
 
 ENDIF.
 
+  " Update INCT
+  MODIFY ENTITIES OF zi_cds_inct_lgo IN LOCAL MODE
+    ENTITY _inctBdef
+      UPDATE
+        FIELDS ( status changed_date )
+        WITH VALUE #( FOR key IN keys (
+          %tky        = key-%tky
+          status      = lv_current_status
+          changed_date = cl_abap_context_info=>get_system_date( ) ) ).
+
+  " Update History (using composition _toHistory)
+  MODIFY ENTITIES OF zi_cds_inct_lgo IN LOCAL MODE
+    ENTITY _inctBdef
+      CREATE BY \_toHistory
+        FIELDS ( previous_status new_status text )
+        WITH VALUE #( FOR key IN keys (
+          %tky              = key-%tky
+          %target = VALUE #( (
+            %cid            = 'HIST01'
+            previous_status = lv_previous_status
+            new_status      = lv_current_status
+            text            = ls_key-%param-text ) ) ) ).
+
   ENDMETHOD.
 
 ENDCLASS.
