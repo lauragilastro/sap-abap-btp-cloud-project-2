@@ -17,6 +17,7 @@ association to ZI_CDS_PRIORITY_LGO as _toCdspriority on $projection.priority = _
     status,
     @Consumption.valueHelpDefinition: [{ entity: { name: 'ZI_CDS_PRIORITY_LGO', element: 'priority_code' } }]
     priority,
+    responsible,
     creation_date,
     changed_date,
     local_created_by,
