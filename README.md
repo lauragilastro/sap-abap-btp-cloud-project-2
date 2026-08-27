@@ -96,3 +96,14 @@ When the user creates an incident, RAP automatically creates the draft entry, bu
 This method is a determination (on modify { create; }) that runs automatically at the moment the user creates the incidence. The method sets status to 'OP' and fills creation_date with the current system date using cl_abap_context_info=>get_system_date( ).
 
 Result: every incident is created with these fields already filled, without the user having to (or being able to) set them by hand.
+
+### changeStatus
+This method activates after Fiori generates popup (based on the abstract entity of the step 8) and order in BDEF (ZI_CDS_CHANGE_STATUS_LGO result [1] $self) and user changes status choosing different options (OP, IP, PE, CO, CL, CN).
+
+But not all options can be changed directly if previously weren't specifically other option. For example, user can change to CO (completed) only if status was IP (in progress), and change to CL (closed) only if status was CO (completed). The method makes sure that this must be done, and if user wants to break the rule, will get error message (also I created exception and messages classes for this).
+
+*Note: CN (cancelled) is allowed in any situation*
+
+After that, I made a authorization section making sure that no status can be changed to IP if field responsible is empty.
+
+At the end, I used MODIFY ENTITIES to update INCT table and its child History using the composition _toHistory.
