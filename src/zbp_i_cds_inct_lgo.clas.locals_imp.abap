@@ -6,6 +6,8 @@ CLASS lhc__inctbdef DEFINITION INHERITING FROM cl_abap_behavior_handler.
       keys FOR _inctBdef~setDefaultValues.
     METHODS changeStatus FOR MODIFY
       keys FOR ACTION _inctBdef~changeStatus RESULT result.
+    METHODS get_instance_authorizations FOR INSTANCE AUTHORIZATION
+        IMPORTING keys REQUEST requested_authorizations FOR _inctBdef RESULT result.
 
 ENDCLASS.
 
@@ -107,6 +109,33 @@ ENDIF.
             text            = ls_key-%param-text ) ) ) ).
 
   ENDMETHOD.
+
+  METHOD get_instance_authorizations.
+
+  READ ENTITIES OF ZI_CDS_INCT_LGO IN LOCAL MODE
+    ENTITY _inctBdef
+      FIELDS ( responsible )
+      WITH CORRESPONDING #( keys )
+    RESULT DATA(lt_incidents).
+
+  LOOP AT lt_incidents INTO DATA(ls_incident).
+
+
+  DATA(lv_authorized) = COND abap_bool(
+    WHEN ls_incident-responsible = sy-uname OR sy-uname = 'TU_USUARIO_ADMIN'
+    THEN abap_true
+    ELSE abap_false ).
+
+  APPEND VALUE #(
+    %tky                  = ls_incident-%tky
+    %action-changeStatus  = COND #( WHEN lv_authorized = abap_true
+                                       THEN if_abap_behv=>auth-allowed
+                                       ELSE if_abap_behv=>auth-unauthorized )
+    ) TO result.
+
+  ENDLOOP.
+
+ENDMETHOD.
 
 ENDCLASS.
 
