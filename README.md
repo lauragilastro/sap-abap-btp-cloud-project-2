@@ -110,3 +110,7 @@ At the end, I used MODIFY ENTITIES to update INCT table and its child History us
 
 ### Should I block the CO/CL from going back?
 I decided not to block going back from CO/CL. Moving forward has to be obligatory because it's part of the process. But blocking the way back could be risky if someone makes a mistake and turns the incident to CO or CL when it isn't completed or cancelled in fact.
+
+## Step 10: Authorizations
+I added a method: get_instance_authorizations which is necessary to protect changeStatus, otherwise whoever could change the incidence's status? for this reason this method runs before changeStatus does.
+The method checks if sy-uname matches with responsible to change an incidence's status. If they don't match then the user has to be an admin, and even if it isn't the action will be blocked.
