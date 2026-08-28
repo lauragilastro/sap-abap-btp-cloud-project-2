@@ -117,4 +117,4 @@ The method checks if sy-uname matches with responsible to change an incidence's 
 
 I also create an authorization object (Z_AUTH_LGO). In a real system, this requires a Business Role (including Z_AUTH_LGO with ACTVT = 02) assigned to a user who should act as admin. But I decided not to work on it because I prefer that this project focuses on the RAP backend logic, not on roles administration.
 
-<img src="screenshot-z_auth_lgo.png" width="500">
+<img src="screenshot-z_auth_lgo.png" width="700">
