@@ -107,3 +107,6 @@ But not all options can be changed directly if previously weren't specifically o
 After that, I made a authorization section making sure that no status can be changed to IP if field responsible is empty.
 
 At the end, I used MODIFY ENTITIES to update INCT table and its child History using the composition _toHistory.
+
+### Should I block the CO/CL from going back?
+I decided not to block going back from CO/CL. Moving forward has to be obligatory because it's part of the process. But blocking the way back could be risky if someone makes a mistake and turns the incident to CO or CL when it isn't completed or cancelled in fact.
