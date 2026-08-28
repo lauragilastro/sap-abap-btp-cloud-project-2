@@ -120,9 +120,10 @@ ENDIF.
 
   LOOP AT lt_incidents INTO DATA(ls_incident).
 
+  AUTHORITY-CHECK OBJECT 'Z_AUTH_LGO' ID 'ACTVT' FIELD '02'.
 
   DATA(lv_authorized) = COND abap_bool(
-    WHEN ls_incident-responsible = sy-uname OR sy-uname = 'TU_USUARIO_ADMIN'
+    WHEN ls_incident-responsible = sy-uname OR sy-subrc = 0
     THEN abap_true
     ELSE abap_false ).
 
