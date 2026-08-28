@@ -115,4 +115,6 @@ I decided not to block going back from CO/CL. Moving forward has to be obligator
 I added a method: get_instance_authorizations which is necessary to protect changeStatus, otherwise whoever could change the incidence's status? for this reason this method runs before changeStatus does.
 The method checks if sy-uname matches with responsible to change an incidence's status. If they don't match then the user has to be an admin, and even if it isn't the action will be blocked.
 
-In a real system, this requires a Business Role (including Z_AUTH_LGO with ACTVT = 02) assigned to a user who should act as admin. I decided not to work on it because I prefer that this project focuses on the RAP backend logic, not on roles administration.
+I also create an authorization object (Z_AUTH_LGO). In a real system, this requires a Business Role (including Z_AUTH_LGO with ACTVT = 02) assigned to a user who should act as admin. But I decided not to work on it because I prefer that this project focuses on the RAP backend logic, not on roles administration.
+
+<img src="screenshot-z_auth_lgo.png" width="500">
