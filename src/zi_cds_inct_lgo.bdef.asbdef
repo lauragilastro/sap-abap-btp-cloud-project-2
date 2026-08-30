@@ -13,7 +13,7 @@ etag master last_changed_at
   delete;
   field ( readonly, numbering : managed ) inc_uuid;
   field ( mandatory ) title, description, priority;
-  action ( features : instance ) changeStatus
+  action changeStatus
   parameter ZI_CDS_CHANGE_STATUS_LGO result [1] $self;
   side effects { action changeStatus affects $self; }
   determination setDefaultValues on modify { create; }

@@ -8,6 +8,7 @@ CLASS zcx_class_messages_lgo DEFINITION
 
     INTERFACES if_t100_message .
     INTERFACES if_t100_dyn_msg .
+    INTERFACES if_abap_behv_message.
 
     CONSTANTS:
       BEGIN OF error_co,

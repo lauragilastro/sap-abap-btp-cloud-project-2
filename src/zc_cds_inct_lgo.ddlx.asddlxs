@@ -10,41 +10,90 @@
 annotate entity ZC_CDS_INCT_LGO
     with 
 {
+
+    @UI.facet: [{
+        id: 'GeneralInfo',
+        purpose: #STANDARD,
+        type: #FIELDGROUP_REFERENCE,
+        label: 'General Information',
+        targetQualifier: 'GeneralInfo',
+        position: 10 },
+        {
+        id: 'HistoryTable',
+        purpose: #STANDARD,
+        type: #LINEITEM_REFERENCE,
+        label: 'History',
+        targetElement: '_toHistory',
+        position: 20 }]
+        
+        @UI.identification: [{
+            type: #FOR_ACTION,
+            dataAction: 'changeStatus',
+            label: 'Change Status' }]
+    
     @UI.dataFieldDefault: [{
         importance: #HIGH }]
     @UI.lineItem: [{
     position: 10,
     importance: #HIGH,
     label: 'Incident ID' }]
+    @UI.fieldGroup: [{
+    qualifier: 'GeneralInfo',
+    position: 10,
+    label: 'Incident ID' }]
     incident_id;
     @UI.lineItem: [{
     position: 20,
     importance: #HIGH,
+    label: 'Title' }]
+    @UI.fieldGroup: [{
+    qualifier: 'GeneralInfo',
+    position: 20,
     label: 'Title' }]
     title;
     @UI.lineItem: [{
     position: 30,
     importance: #LOW,
     label: 'Description' }]
+    @UI.fieldGroup: [{
+    qualifier: 'GeneralInfo',
+    position: 30,
+    label: 'Description' }]
     description;
     @UI.lineItem: [{
     position: 40,
     importance: #HIGH,
+    label: 'Status' }]
+    @UI.fieldGroup: [{
+    qualifier: 'GeneralInfo',
+    position: 40,
     label: 'Status' }]
     status;
     @UI.lineItem: [{
     position: 50,
     importance: #MEDIUM,
     label: 'Priority' }]
+    @UI.fieldGroup: [{
+    qualifier: 'GeneralInfo',
+    position: 50,
+    label: 'Priority' }]
     priority;
     @UI.lineItem: [{
     position: 60,
     importance: #LOW,
     label: 'Responsible' }]
+    @UI.fieldGroup: [{
+    qualifier: 'GeneralInfo',
+    position: 60,
+    label: 'Responsible' }]
     responsible;
     @UI.lineItem: [{
     position: 70,
     importance: #MEDIUM,
+    label: 'Creation Date' }]
+    @UI.fieldGroup: [{
+    qualifier: 'GeneralInfo',
+    position: 70,
     label: 'Creation Date' }]
     creation_date;
 }

@@ -8,6 +8,8 @@ CLASS lhc__inctbdef DEFINITION INHERITING FROM cl_abap_behavior_handler.
       keys FOR ACTION _inctBdef~changeStatus RESULT result.
     METHODS get_instance_authorizations FOR INSTANCE AUTHORIZATION
         IMPORTING keys REQUEST requested_authorizations FOR _inctBdef RESULT result.
+    METHODS get_global_authorizations FOR GLOBAL AUTHORIZATION
+    IMPORTING REQUEST requested_authorizations FOR _inctBdef RESULT result.
 
 ENDCLASS.
 
@@ -57,33 +59,37 @@ DATA lv_responsible TYPE zde_responsible_lgo.
   lv_previous_status = ls_incident-status.
 
 IF lv_current_status = 'CO' AND lv_previous_status <> 'IP'.
-  RAISE EXCEPTION TYPE zcx_class_messages_lgo
-    EXPORTING
-      textid = zcx_class_messages_lgo=>error_co.
+  APPEND VALUE #( %tky = ls_key-%tky ) TO failed-_inctBdef.
+  APPEND VALUE #( %tky = ls_key-%tky
+                   %msg = NEW zcx_class_messages_lgo( textid = zcx_class_messages_lgo=>error_co ) )
+    TO reported-_inctBdef.
+  RETURN.
 ENDIF.
 
 IF lv_current_status = 'CL' AND lv_previous_status <> 'CO'.
-  RAISE EXCEPTION TYPE zcx_class_messages_lgo
-    EXPORTING
-      textid = zcx_class_messages_lgo=>error_cl.
+  APPEND VALUE #( %tky = ls_key-%tky ) TO failed-_inctBdef.
+  APPEND VALUE #( %tky = ls_key-%tky
+                   %msg = NEW zcx_class_messages_lgo( textid = zcx_class_messages_lgo=>error_cl ) )
+    TO reported-_inctBdef.
+  RETURN.
 ENDIF.
 
 " Authorization section
-  READ ENTITIES OF zi_cds_inct_lgo IN LOCAL MODE
-    ENTITY _inctBdef
-      FIELDS ( responsible )
-        WITH CORRESPONDING #( keys )
-    RESULT DATA(lt_responsible).
+  " READ ENTITIES OF zi_cds_inct_lgo IN LOCAL MODE
+    " ENTITY _inctBdef
+      " FIELDS ( responsible )
+        " WITH CORRESPONDING #( keys )
+    " RESULT DATA(lt_responsible).
 
-READ TABLE lt_responsible INTO DATA(ls_responsible) INDEX 1.
-  lv_responsible = ls_responsible-responsible.
+" READ TABLE lt_responsible INTO DATA(ls_responsible) INDEX 1.
+  " lv_responsible = ls_responsible-responsible.
 
-IF lv_current_status = 'IP' AND lv_responsible IS INITIAL.
-  RAISE EXCEPTION TYPE zcx_class_messages_lgo
-    EXPORTING
-      textid = zcx_class_messages_lgo=>error_empty_responsible.
+" IF lv_current_status = 'IP' AND lv_responsible IS INITIAL.
+  " RAISE EXCEPTION TYPE zcx_class_messages_lgo
+    " EXPORTING
+      " textid = zcx_class_messages_lgo=>error_empty_responsible.
 
-ENDIF.
+" ENDIF.
 
   " Update INCT
   MODIFY ENTITIES OF zi_cds_inct_lgo IN LOCAL MODE
@@ -120,21 +126,32 @@ ENDIF.
 
   LOOP AT lt_incidents INTO DATA(ls_incident).
 
-  AUTHORITY-CHECK OBJECT 'Z_AUTH_LGO' ID 'ACTVT' FIELD '02'.
+  " AUTHORITY-CHECK OBJECT 'Z_AUTH_LGO' ID 'ACTVT' FIELD '02'.
 
-  DATA(lv_authorized) = COND abap_bool(
-    WHEN ls_incident-responsible = sy-uname OR sy-subrc = 0
-    THEN abap_true
-    ELSE abap_false ).
+  "DATA(lv_authorized) = COND abap_bool(
+    "WHEN ls_incident-responsible = sy-uname OR sy-subrc = 0
+    "THEN abap_true
+    "ELSE abap_false ).
 
   APPEND VALUE #(
     %tky                  = ls_incident-%tky
-    %action-changeStatus  = COND #( WHEN lv_authorized = abap_true
-                                       THEN if_abap_behv=>auth-allowed
-                                       ELSE if_abap_behv=>auth-unauthorized )
+    %action-changeStatus  = if_abap_behv=>auth-allowed " Instead COND #( WHEN lv_authorized = abap_true
+                                       " THEN if_abap_behv=>auth-allowed
+                                       " ELSE if_abap_behv=>auth-unauthorized )
     ) TO result.
 
   ENDLOOP.
+
+ENDMETHOD.
+
+METHOD get_global_authorizations.
+
+  " AUTHORITY-CHECK OBJECT 'Z_AUTH_LGO' ID 'ACTVT' FIELD '01'.
+
+  " result-%create = COND #( WHEN sy-subrc = 0
+                              " THEN if_abap_behv=>auth-allowed
+                              " ELSE if_abap_behv=>auth-unauthorized ).
+  result-%create = if_abap_behv=>auth-allowed.
 
 ENDMETHOD.
 
