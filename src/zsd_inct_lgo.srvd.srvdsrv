@@ -1,0 +1,4 @@
+@EndUserText.label: 'Service definition'
+define service ZSD_INCT_LGO {
+  expose ZC_CDS_INCT_LGO;
+}
