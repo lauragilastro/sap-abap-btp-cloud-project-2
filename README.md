@@ -140,35 +140,35 @@ I chose for the binding type ODATA V4 - UI, recommended by Claude Pro.
 ### Fiori Elements Test
 The first impression was good, everything was shown correctly:
 
-<img src="fiori1.jpg" width="500">
+<img src="fiori1.png" width="500">
 
 But when I tried to create an incident I got this error:
 
-<img src="fiori2-error.jpg" width="500">
+<img src="fiori2-error.png" width="500">
 
 I realized thanks to Claude Pro that all I needed was adding get_instance_authorizations method.
 I tried to create a new incidence and I got a new error:
 
-<img src="fiori3-error2.jpg" width="500">
+<img src="fiori3-error2.png" width="500">
 
 So I decided to disable everything related to authorizations only for testing. I didn't delete codes, only commented with `"`
 
 I tried to create the new incidence and I got another error. I analyzed it with Claude Pro and the problem was in line 16 of BDEF because I wrote `action ( features : instance ) changeStatus` because one time I thought it was a good idea to hide changeStatus button after putting an incidence in CO or CL, but finally I decided not to do. So I left the custom action written and it induces into dump. I fixed it to `action changeStatus`
 
-<img src="fiori4-error3.jpg" width="500">
+<img src="fiori4-error3.png" width="500">
 
 I tried to create the new incidence and another error. I analyzed it with Claude Pro again, and the problem was that I forgot to write in consumption entity @UI.facet (with `targetElement: '_toHistory'`) and @UI.fieldGroup in each field.
 
 I tried to create the new incidence and success! I could do it! I filled the boxes with invented information and I could create the incidence without any problem.
 
-<img src="fiori5.jpg" width="500">
+<img src="fiori5.png" width="500">
 
 Also the status and priority popups works!
 
-<img src="fiori6.jpg" width="500">
+<img src="fiori6.png" width="500">
 
 One problem left: the history didn't work:
-<img src="fiori7.jpg" width="500">
+<img src="fiori7.png" width="500">
 
 I analyzed it with Claude Pro and the problem was I wrote initially in the service definition:
 `@EndUserText.label: 'Service definition'
@@ -179,17 +179,17 @@ define service ZSD_INCT_LGO {
 But Claude Pro told me that `expose ZC_CDS_INCT_H_LGO;` it wasn't necessary, so I deleted it.
 But now, I added it again, and history already works!
 
-<img src="fiori8.jpg" width="500">
+<img src="fiori8.png" width="500">
 
 ChangeStatus also works:
 
-<img src="fiori9.jpg" width="500">
-<img src="fiori10.jpg" width="500">
+<img src="fiori9.png" width="500">
+<img src="fiori10.png" width="500">
 
 Also when i tried to change the status to CO or CL. Success because the transition is blocked, but the custom error message doesn't render on the frontend (I'm still investigating why)
 
-<img src="fiori11.jpg" width="500">
-<img src="fiori12.jpg" width="500">
+<img src="fiori11.png" width="500">
+<img src="fiori12.png" width="500">
 
 Maybe the problem was I used RAISE EXCEPTION in the behavior implementation, and it's forbidden, I changed it with Claude Pro's help writing:
 `APPEND VALUE #( %tky = ls_key-%tky ) TO failed-_inctBdef.
