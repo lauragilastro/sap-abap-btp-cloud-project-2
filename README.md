@@ -189,8 +189,8 @@ ChangeStatus also works:
 
 Also when i tried to change the status to CO or CL, but I got a DUMP error instead the expected message error.
 
-<img src="fiori11.png" width="500">
 <img src="fiori12.png" width="500">
+<img src="fiori11.png" width="500">
 
 The problem was I used RAISE EXCEPTION in the behavior implementation, and it's forbidden, I changed it with Claude Pro's help writing:
 `APPEND VALUE #( %tky = ls_key-%tky ) TO failed-_inctBdef.
@@ -200,6 +200,6 @@ The problem was I used RAISE EXCEPTION in the behavior implementation, and it's 
   RETURN.` (Also for error_cl)
 It also required adding `if_abap_behv_message` in exception class zcx_class_messages_lgo.
 
-Thanks to this try, now I change to CO/CL and the system shows a default error message, not a DUMP. (I'm still investigating why)
+Now I change to CO/CL and the system shows a default error message instead my personalized message, but at least, it is not a DUMP.
 
 Update and delete works correctly.
