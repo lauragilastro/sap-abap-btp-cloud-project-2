@@ -1,0 +1,28 @@
+@Metadata.layer: #CORE
+annotate entity ZC_CDS_INCT_H_LGO
+    with 
+{
+    @UI.lineItem: [{
+    position: 10,
+    importance: #HIGH,
+    label: 'History ID' }]
+    his_id;
+
+    @UI.lineItem: [{
+    position: 20,
+    importance: #HIGH,
+    label: 'Previous Status' }]
+    previous_status;
+
+    @UI.lineItem: [{
+    position: 30,
+    importance: #HIGH,
+    label: 'Current Status' }]
+    new_status;
+
+    @UI.lineItem: [{
+    position: 40,
+    importance: #MEDIUM,
+    label: 'Observations' }]
+    text;
+}

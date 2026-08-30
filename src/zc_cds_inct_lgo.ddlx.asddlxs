@@ -1,0 +1,50 @@
+@Metadata.layer: #CORE
+@UI: {
+    headerInfo: {
+        typeName: 'Incidence',
+        typeNamePlural: 'Incidences',
+        title: { type: #STANDARD, value: 'title' }},
+    presentationVariant: [{
+        sortOrder: [{ by: 'title', direction: #ASC }],
+        visualizations: [{ type: #AS_LINEITEM }] }] }
+annotate entity ZC_CDS_INCT_LGO
+    with 
+{
+    @UI.dataFieldDefault: [{
+        importance: #HIGH }]
+    @UI.lineItem: [{
+    position: 10,
+    importance: #HIGH,
+    label: 'Incident ID' }]
+    incident_id;
+    @UI.lineItem: [{
+    position: 20,
+    importance: #HIGH,
+    label: 'Title' }]
+    title;
+    @UI.lineItem: [{
+    position: 30,
+    importance: #LOW,
+    label: 'Description' }]
+    description;
+    @UI.lineItem: [{
+    position: 40,
+    importance: #HIGH,
+    label: 'Status' }]
+    status;
+    @UI.lineItem: [{
+    position: 50,
+    importance: #MEDIUM,
+    label: 'Priority' }]
+    priority;
+    @UI.lineItem: [{
+    position: 60,
+    importance: #LOW,
+    label: 'Responsible' }]
+    responsible;
+    @UI.lineItem: [{
+    position: 70,
+    importance: #MEDIUM,
+    label: 'Creation Date' }]
+    creation_date;
+}

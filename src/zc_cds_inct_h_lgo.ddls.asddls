@@ -1,6 +1,7 @@
 @AccessControl.authorizationCheck: #NOT_REQUIRED
 @EndUserText.label: 'consumption entity for history'
 @Metadata.ignorePropagatedAnnotations: true
+@Metadata.allowExtensions: true
 define view entity ZC_CDS_INCT_H_LGO as projection on ZI_CDS_INCT_H_LGO
 
 {
