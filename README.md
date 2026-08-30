@@ -168,6 +168,7 @@ Also the status and priority popups works!
 <img src="fiori6.png" width="500">
 
 One problem left: the history didn't work:
+
 <img src="fiori7.png" width="500">
 
 I analyzed it with Claude Pro and the problem was I wrote initially in the service definition:
