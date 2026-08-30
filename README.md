@@ -187,12 +187,12 @@ ChangeStatus also works:
 <img src="fiori9.png" width="500">
 <img src="fiori10.png" width="500">
 
-Also when i tried to change the status to CO or CL. Success because the transition is blocked, but the custom error message doesn't render on the frontend (I'm still investigating why)
+Also when i tried to change the status to CO or CL, but I got a DUMP error instead the expected message error.
 
 <img src="fiori11.png" width="500">
 <img src="fiori12.png" width="500">
 
-Maybe the problem was I used RAISE EXCEPTION in the behavior implementation, and it's forbidden, I changed it with Claude Pro's help writing:
+The problem was I used RAISE EXCEPTION in the behavior implementation, and it's forbidden, I changed it with Claude Pro's help writing:
 `APPEND VALUE #( %tky = ls_key-%tky ) TO failed-_inctBdef.
   APPEND VALUE #( %tky = ls_key-%tky
                    %msg = NEW zcx_class_messages_lgo( textid = zcx_class_messages_lgo=>error_co ) )
@@ -200,6 +200,6 @@ Maybe the problem was I used RAISE EXCEPTION in the behavior implementation, and
   RETURN.` (Also for error_cl)
 It also required adding `if_abap_behv_message` in exception class zcx_class_messages_lgo.
 
-Thanks to this try, now I change to CO/CL and the system shows a default error message, not a DUMP.
+Thanks to this try, now I change to CO/CL and the system shows a default error message, not a DUMP. (I'm still investigating why)
 
 Update and delete works correctly.
