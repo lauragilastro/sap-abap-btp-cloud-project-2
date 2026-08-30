@@ -1,0 +1,26 @@
+projection;
+strict ( 2 );
+use draft;
+
+define behavior for ZC_CDS_INCT_LGO alias _inctBdef
+{
+  use create;
+  use update;
+  use delete;
+
+  use action changeStatus;
+
+  use action Edit;
+  use action Activate;
+  use action Discard;
+  use action Resume;
+  use action Prepare;
+
+  use association _toHistory { with draft; }
+}
+
+define behavior for ZC_CDS_INCT_H_LGO //alias <alias_name>
+{
+
+  use association _toInct { with draft; }
+}
